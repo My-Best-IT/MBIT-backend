@@ -19,7 +19,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("pychart/", include("pychart.urls")),
+    path("pychart/", include("pychart.urls")), #pychart앱으로 연결
 ]
 
 
