@@ -1,18 +1,12 @@
-from .views import MbitAPI,MbitAPIS
-from django.urls import path,include
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import MbitAPI, MbitAPIS, MbitViewSet  # Ensure this import is correct
 
-from django.contrib import admin
-from django.urls import path,include
+router = DefaultRouter()
+router.register(r'mbits', MbitViewSet, basename='mbit')
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("pychart/", include("pychart.urls")),
-    
-]
-
-
-urlpatterns =[
-    path("fbv/mbits",MbitAPI),
-    path("fbv/mbits/<int:frontend>",MbitAPIS),
-
+    path('fbv/mbits/', MbitAPI),
+    path('fbv/mbits/<str:frontend>/<str:backend>/<str:data>/<str:game>/<str:security>/', MbitAPIS, name='mbit-apis'),
+    path('', include(router.urls)),
 ]
